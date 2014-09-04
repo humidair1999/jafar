@@ -1,0 +1,27 @@
+{
+  "name": "jafar",
+  "version": "0.0.0",
+  "author": "J. Ky Marsh",
+  "description": "A module for performing regex-based find and replace on JSON nodes.",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkymarsh/jafar.git"
+  },
+  "keywords": [
+    "json",
+    "regex",
+    "regular expression",
+    "find",
+    "replace"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jkymarsh/jafar/issues"
+  },
+  "homepage": "https://github.com/jkymarsh/jafar"
+}
