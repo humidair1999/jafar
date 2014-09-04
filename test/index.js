@@ -4,16 +4,24 @@ var assert = require('assert'),
 describe('TODO', function() {
     it('TODO', function() {
         var jafar = new Jafar({
+            json: './test/sample.json'
+        });
+
+        jafar.displayJson();
+
+        //assert.equal(TODO, TODO);
+    });
+
+    it('TODO', function() {
+        var jafar2 = new Jafar({
             json: {
                 "thing": {
                     "another": "something"
                 }
             }
-            // ,
-            // json: './sample.json'
         });
 
-        jafar.printJson();
+        jafar2.displayJson();
 
         //assert.equal(TODO, TODO);
     });
