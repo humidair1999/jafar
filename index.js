@@ -1,16 +1,18 @@
 var fs = require('fs');
 
 var Jafar = function(opts) {
-    var that = this;
+    var that = this,
+        // TODO: would need error handling to ensure opts exists at all
+        inputJson = opts.json ? opts.json : null;
 
-    if (!opts.json || (typeof(opts.json) !== 'object' && typeof(opts.json) !== 'string')) {
+    if (!inputJson || (typeof(inputJson) !== 'object' && typeof(inputJson) !== 'string')) {
         throw new Error('You must pass a reference to a valid JSON object/file into Jafar constructor!');
     }
 
-    this.json = (typeof(opts.json) === 'object') ? opts.json : this.parseJsonFile(opts.json);
+    this.json = (typeof(inputJson) === 'object') ? inputJson : this.readJsonFile(inputJson);
 };
 
-Jafar.prototype.parseJsonFile = function(input) {
+Jafar.prototype.readJsonFile = function(input) {
     try {
         return JSON.parse(fs.readFileSync(input));
     }
