@@ -42,6 +42,25 @@ Jafar.prototype.listAllKeys = function() {
     return keys;
 };
 
+Jafar.prototype.replaceKey = function() {
+    var newObj = {};
+
+    (function recurseObjectValues(obj) {
+        for (var key in obj) {
+            if (typeof obj[key] === "object") {
+                // TODO: doesn't work!
+                newObj[key] = obj[key];
+
+                recurseObjectValues(obj[key]);
+            }
+        }
+    })(this.json);
+
+    console.log(this.json);
+    console.log('LOLOLOLOLOLOLOLO');
+    console.log(newObj);
+};
+
 Jafar.prototype.listAllValues = function() {
     var values = [];
 
