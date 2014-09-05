@@ -43,7 +43,7 @@ describe('TODO', function() {
         // jafar2.findKey('thing2');
         // jafar2.findValue('something2');
 
-        jafar2.replaceKey('thing2');
+        //jafar2.replaceKey('thing2');
 
         //assert.equal(TODO, TODO);
     });

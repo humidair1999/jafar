@@ -45,16 +45,49 @@ Jafar.prototype.listAllKeys = function() {
 Jafar.prototype.replaceKey = function() {
     var newObj = {};
 
-    (function recurseObjectValues(obj) {
-        for (var key in obj) {
-            if (typeof obj[key] === "object") {
-                // TODO: doesn't work!
-                newObj[key] = obj[key];
+    // function clone(obj) {
+    //     if(obj == null || typeof(obj) != 'object')
+    //         return obj;
 
-                recurseObjectValues(obj[key]);
+    //     var temp = obj.constructor(); // changed
+
+    //     for(var key in obj) {
+    //         if(obj.hasOwnProperty(key)) {
+    //             temp[key] = clone(obj[key]);
+    //         }
+    //     }
+    //     return temp;
+    // }
+
+    function cloneObject(obj) {
+        var clone = {};
+
+        for (var key in obj) {
+            if (obj[key] && typeof(obj[key]) === "object") {
+                console.log('67: ', obj[key]);
+                clone[key] = cloneObject(obj[key]);
             }
+            else {
+                console.log('70: ', obj[key]);
+                clone[key] = obj[key];
+            }
+
+            // console.log(clone);
+            // console.log('\n');
         }
-    })(this.json);
+
+        return clone;
+    }
+
+    newObj = cloneObject(this.json);
+
+    // (function recurseObjectValues(obj) {
+    //     for (var key in obj) {
+    //         if (typeof obj[key] === "object") {
+    //             recurseObjectValues(obj[key]);
+    //         }
+    //     }
+    // })(this.json);
 
     console.log(this.json);
     console.log('LOLOLOLOLOLOLOLO');
