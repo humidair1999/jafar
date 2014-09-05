@@ -28,7 +28,7 @@ Jafar.prototype.displayJson = function() {
 Jafar.prototype.listAllKeys = function() {
     var keys = [];
 
-    function recurseObjectKeys(obj) {
+    (function recurseObjectKeys(obj) {
         for (var key in obj) {
             keys.push(key);
 
@@ -36,13 +36,7 @@ Jafar.prototype.listAllKeys = function() {
                 recurseObjectKeys(obj[key]);
             }
         }
-    }
-
-    recurseObjectKeys(this.json);
-
-    // for (var key in this.json) {
-    //     keys.push(key);
-    // }
+    })(this.json);
 
     console.log('keys: ', keys);
     return keys;
@@ -51,7 +45,7 @@ Jafar.prototype.listAllKeys = function() {
 Jafar.prototype.listAllValues = function() {
     var values = [];
 
-    function recurseObjectValues(obj) {
+    (function recurseObjectValues(obj) {
         for (var key in obj) {
             if (typeof obj[key] === "object") {
                 recurseObjectValues(obj[key]);
@@ -60,12 +54,22 @@ Jafar.prototype.listAllValues = function() {
                 values.push(obj[key]);
             }
         }
-    }
-
-    recurseObjectValues(this.json);
+    })(this.json);
 
     console.log('values: ', values);
     return values;
+};
+
+Jafar.prototype.findKey = function(key) {
+    var keys = this.listAllKeys();
+
+    console.log(keys.indexOf(key));
+};
+
+Jafar.prototype.findValue = function(value) {
+    var values = this.listAllValues();
+
+    console.log(values.indexOf(value));
 };
 
 module.exports = Jafar;
