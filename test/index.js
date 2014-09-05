@@ -8,8 +8,12 @@ describe('TODO', function() {
         });
 
         jafar.displayJson();
+        jafar.listAllKeys();
+        jafar.listAllValues();
 
         //assert.equal(TODO, TODO);
+
+        console.log('-----------------------------------------------------------');
     });
 
     it('TODO', function() {
@@ -17,11 +21,21 @@ describe('TODO', function() {
             json: {
                 "thing": {
                     "another": "something"
+                },
+                "thing2": {
+                    "another2": "something2"
+                },
+                "thing3": {
+                    "thing4": {
+                        "thing5": "something3"
+                    }
                 }
             }
         });
 
         jafar2.displayJson();
+        jafar2.listAllKeys();
+        jafar2.listAllValues();
 
         //assert.equal(TODO, TODO);
     });

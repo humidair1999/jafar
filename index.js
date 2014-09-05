@@ -22,7 +22,50 @@ Jafar.prototype.readJsonFile = function(input) {
 };
 
 Jafar.prototype.displayJson = function() {
-    console.log(this.json);
+    //console.log(this.json);
+};
+
+Jafar.prototype.listAllKeys = function() {
+    var keys = [];
+
+    function recurseObjectKeys(obj) {
+        for (var key in obj) {
+            keys.push(key);
+
+            if (typeof obj[key] === "object") {
+                recurseObjectKeys(obj[key]);
+            }
+        }
+    }
+
+    recurseObjectKeys(this.json);
+
+    // for (var key in this.json) {
+    //     keys.push(key);
+    // }
+
+    console.log('keys: ', keys);
+    return keys;
+};
+
+Jafar.prototype.listAllValues = function() {
+    var values = [];
+
+    function recurseObjectValues(obj) {
+        for (var key in obj) {
+            if (typeof obj[key] === "object") {
+                recurseObjectValues(obj[key]);
+            }
+            else {
+                values.push(obj[key]);
+            }
+        }
+    }
+
+    recurseObjectValues(this.json);
+
+    console.log('values: ', values);
+    return values;
 };
 
 module.exports = Jafar;
