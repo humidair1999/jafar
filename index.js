@@ -47,24 +47,26 @@ Jafar.prototype.replaceKey = function(findString, replaceString) {
 
     function cloneObject(obj) {
         var clone = {},
-            replaceKey;
+            replaceKey = null;
 
         for (var key in obj) {
+            // if current object key matches the user's passed-in 'find' string,
+            //  set clone key to 'replace' string; otherwise, maintain existing
+            //  object key
             replaceKey = (key === findString) ? replaceString : key;
 
-            console.log(replaceKey);
-
+            // if currently-iterated property is NOT the lowest-level key/value
+            //  pair, recurse over this sub-object to continue traversal
             if (obj[key] && typeof(obj[key]) === "object") {
                 console.log('67: ', key);
                 clone[replaceKey] = cloneObject(obj[key]);
             }
+            // else if this property IS the lowest-level key/value pair, simply
+            //  set the clone's property to the current object property
             else {
                 console.log('70: ', key);
                 clone[replaceKey] = obj[key];
             }
-
-            // console.log(clone);
-            // console.log('\n');
         }
 
         return clone;
