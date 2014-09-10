@@ -2,8 +2,13 @@ var fs = require('fs');
 
 var Jafar = function(opts) {
     var that = this,
-        // TODO: would need error handling to ensure opts exists at all
-        inputJson = opts.json ? opts.json : null;
+        inputJson = null;
+
+    if (!opts) {
+        throw new Error('Cannot initialize Jafar without any options!');
+    }
+
+    inputJson = opts.json ? opts.json : null;
 
     if (!inputJson || (typeof(inputJson) !== 'object' && typeof(inputJson) !== 'string')) {
         throw new Error('You must pass a reference to a valid JSON object/file into Jafar constructor!');
