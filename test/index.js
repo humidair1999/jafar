@@ -13,7 +13,7 @@ describe('TODO', function() {
         // jafar.findKey('thing2');
         // jafar.findValue('something2');
 
-        jafar.replaceValue('something3', 'lol');
+        jafar.replaceValuePartial('some', 'LOL');
 
         //assert.equal(TODO, TODO);
 

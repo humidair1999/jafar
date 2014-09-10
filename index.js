@@ -14,22 +14,18 @@ var Jafar = function(opts) {
         throw new Error('You must pass a reference to a valid JSON object/file into Jafar constructor!');
     }
 
-    this.json = (typeof(inputJson) === 'object') ? inputJson : this.readJsonFile(inputJson);
+    this.json = (typeof(inputJson) === 'object') ? inputJson : this._readJsonFile(inputJson);
 };
 
 // utility methods
 
-Jafar.prototype.readJsonFile = function(input) {
+Jafar.prototype._readJsonFile = function(input) {
     try {
         return JSON.parse(fs.readFileSync(input));
     }
     catch(err) {
         throw new Error('Input JSON file could not be read!');
     }
-};
-
-Jafar.prototype.displayJson = function() {
-    //console.log(this.json);
 };
 
 // key viewing/replacing methods
@@ -138,6 +134,42 @@ Jafar.prototype.replaceValue = function(findString, replaceString) {
                 //  set clone value to 'replace' string; otherwise, maintain existing
                 //  object value
                 replaceValue = (obj[key] === findString) ? replaceString : obj[key];
+
+                clone[key] = replaceValue;
+            }
+        }
+
+        return clone;
+    }
+
+    newObj = cloneObject(this.json);
+
+    console.log(this.json);
+    console.log('------------------------------------------------------------');
+    console.log(newObj);
+};
+
+Jafar.prototype.replaceValuePartial = function(findString, replaceString) {
+    var newObj = {};
+
+    function cloneObject(obj) {
+        var clone = {},
+            replaceValue = null,
+            findRegEx = new RegExp(findString, 'g');
+
+        for (var key in obj) {
+            // if currently-iterated key is NOT the lowest-level key/value
+            //  pair, recurse over this sub-object to continue traversal
+            if (obj[key] && typeof(obj[key]) === "object") {
+                clone[key] = cloneObject(obj[key]);
+            }
+            // else if this key IS the lowest-level key/value pair, set the
+            //  clone's value
+            else {
+                // if current object value matches the user's passed-in 'find' string,
+                //  set clone value to 'replace' string; otherwise, maintain existing
+                //  object value
+                replaceValue = (obj[key].indexOf(findString) > -1) ? obj[key].replace(findRegEx, replaceString) : obj[key];
 
                 clone[key] = replaceValue;
             }
