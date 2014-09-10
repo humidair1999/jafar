@@ -42,34 +42,25 @@ Jafar.prototype.listAllKeys = function() {
     return keys;
 };
 
-Jafar.prototype.replaceKey = function() {
+Jafar.prototype.replaceKey = function(findString, replaceString) {
     var newObj = {};
 
-    // function clone(obj) {
-    //     if(obj == null || typeof(obj) != 'object')
-    //         return obj;
-
-    //     var temp = obj.constructor(); // changed
-
-    //     for(var key in obj) {
-    //         if(obj.hasOwnProperty(key)) {
-    //             temp[key] = clone(obj[key]);
-    //         }
-    //     }
-    //     return temp;
-    // }
-
     function cloneObject(obj) {
-        var clone = {};
+        var clone = {},
+            replaceKey;
 
         for (var key in obj) {
+            replaceKey = (key === findString) ? replaceString : key;
+
+            console.log(replaceKey);
+
             if (obj[key] && typeof(obj[key]) === "object") {
-                console.log('67: ', obj[key]);
-                clone[key] = cloneObject(obj[key]);
+                console.log('67: ', key);
+                clone[replaceKey] = cloneObject(obj[key]);
             }
             else {
-                console.log('70: ', obj[key]);
-                clone[key] = obj[key];
+                console.log('70: ', key);
+                clone[replaceKey] = obj[key];
             }
 
             // console.log(clone);
@@ -80,14 +71,6 @@ Jafar.prototype.replaceKey = function() {
     }
 
     newObj = cloneObject(this.json);
-
-    // (function recurseObjectValues(obj) {
-    //     for (var key in obj) {
-    //         if (typeof obj[key] === "object") {
-    //             recurseObjectValues(obj[key]);
-    //         }
-    //     }
-    // })(this.json);
 
     console.log(this.json);
     console.log('LOLOLOLOLOLOLOLO');
