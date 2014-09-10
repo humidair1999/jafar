@@ -12,6 +12,8 @@ var Jafar = function(opts) {
     this.json = (typeof(inputJson) === 'object') ? inputJson : this.readJsonFile(inputJson);
 };
 
+// utility methods
+
 Jafar.prototype.readJsonFile = function(input) {
     try {
         return JSON.parse(fs.readFileSync(input));
@@ -24,6 +26,8 @@ Jafar.prototype.readJsonFile = function(input) {
 Jafar.prototype.displayJson = function() {
     //console.log(this.json);
 };
+
+// key viewing/replacing methods
 
 Jafar.prototype.listAllKeys = function() {
     var keys = [];
@@ -42,6 +46,12 @@ Jafar.prototype.listAllKeys = function() {
     return keys;
 };
 
+Jafar.prototype.findKey = function(key) {
+    var keys = this.listAllKeys();
+
+    console.log(keys.indexOf(key));
+};
+
 Jafar.prototype.replaceKey = function(findString, replaceString) {
     var newObj = {};
 
@@ -55,16 +65,14 @@ Jafar.prototype.replaceKey = function(findString, replaceString) {
             //  object key
             replaceKey = (key === findString) ? replaceString : key;
 
-            // if currently-iterated property is NOT the lowest-level key/value
+            // if currently-iterated key is NOT the lowest-level key/value
             //  pair, recurse over this sub-object to continue traversal
             if (obj[key] && typeof(obj[key]) === "object") {
-                console.log('67: ', key);
                 clone[replaceKey] = cloneObject(obj[key]);
             }
-            // else if this property IS the lowest-level key/value pair, simply
-            //  set the clone's property to the current object property
+            // else if this key IS the lowest-level key/value pair, simply
+            //  set the clone's key to the current object key
             else {
-                console.log('70: ', key);
                 clone[replaceKey] = obj[key];
             }
         }
@@ -75,9 +83,11 @@ Jafar.prototype.replaceKey = function(findString, replaceString) {
     newObj = cloneObject(this.json);
 
     console.log(this.json);
-    console.log('LOLOLOLOLOLOLOLO');
+    console.log('------------------------------------------------------------');
     console.log(newObj);
 };
+
+// value viewing/replacing methods
 
 Jafar.prototype.listAllValues = function() {
     var values = [];
@@ -97,16 +107,45 @@ Jafar.prototype.listAllValues = function() {
     return values;
 };
 
-Jafar.prototype.findKey = function(key) {
-    var keys = this.listAllKeys();
-
-    console.log(keys.indexOf(key));
-};
-
 Jafar.prototype.findValue = function(value) {
     var values = this.listAllValues();
 
     console.log(values.indexOf(value));
+};
+
+Jafar.prototype.replaceValue = function(findString, replaceString) {
+    var newObj = {};
+
+    function cloneObject(obj) {
+        var clone = {},
+            replaceValue = null;
+
+        for (var key in obj) {
+            // if currently-iterated key is NOT the lowest-level key/value
+            //  pair, recurse over this sub-object to continue traversal
+            if (obj[key] && typeof(obj[key]) === "object") {
+                clone[key] = cloneObject(obj[key]);
+            }
+            // else if this key IS the lowest-level key/value pair, set the
+            //  clone's value
+            else {
+                // if current object value matches the user's passed-in 'find' string,
+                //  set clone value to 'replace' string; otherwise, maintain existing
+                //  object value
+                replaceValue = (obj[key] === findString) ? replaceString : obj[key];
+
+                clone[key] = replaceValue;
+            }
+        }
+
+        return clone;
+    }
+
+    newObj = cloneObject(this.json);
+
+    console.log(this.json);
+    console.log('------------------------------------------------------------');
+    console.log(newObj);
 };
 
 module.exports = Jafar;
