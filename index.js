@@ -88,6 +88,42 @@ Jafar.prototype.replaceKey = function(findString, replaceString) {
     console.log(newObj);
 };
 
+Jafar.prototype.replaceKeyPartial = function(findString, replaceString) {
+    var newObj = {};
+
+    function cloneObject(obj) {
+        var clone = {},
+            replaceKey = null,
+            findRegEx = new RegExp(findString, 'g');
+
+        for (var key in obj) {
+            // if current object key matches the user's passed-in 'find' string,
+            //  set clone key to 'replace' string; otherwise, maintain existing
+            //  object key
+            replaceKey = (key.indexOf(findString) > -1) ? key.replace(findRegEx, replaceString) : key;
+
+            // if currently-iterated key is NOT the lowest-level key/value
+            //  pair, recurse over this sub-object to continue traversal
+            if (obj[key] && typeof(obj[key]) === "object") {
+                clone[replaceKey] = cloneObject(obj[key]);
+            }
+            // else if this key IS the lowest-level key/value pair, simply
+            //  set the clone's key to the current object key
+            else {
+                clone[replaceKey] = obj[key];
+            }
+        }
+
+        return clone;
+    }
+
+    newObj = cloneObject(this.json);
+
+    console.log(this.json);
+    console.log('------------------------------------------------------------');
+    console.log(newObj);
+};
+
 // value viewing/replacing methods
 
 Jafar.prototype.listAllValues = function() {
