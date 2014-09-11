@@ -1,7 +1,21 @@
 var assert = require('assert'),
     Jafar = require('../index');
 
-describe('TODO', function() {
+describe('JSON loaded via file', function() {
+    var jafar;
+
+    beforeEach(function() {
+        jafar = new Jafar({
+            json: './test/sample.json'
+        });
+    });
+
+    describe('constructor', function() {
+        it('should attach .json property when valid JSON file loaded', function() {
+            assert.ok(jafar.json);
+        });
+    });
+
     it('TODO', function() {
         var jafar = new Jafar({
             json: './test/sample.json'
@@ -15,34 +29,6 @@ describe('TODO', function() {
 
         //assert.equal(TODO, TODO);
 
-        jafar.replaceValue('something', 'LOL', true);
-    });
-
-    it('TODO', function() {
-        var jafar2 = new Jafar({
-            json: {
-                "thing": {
-                    "another": "something"
-                },
-                "thing2": {
-                    "another2": "something2"
-                },
-                "thing3": {
-                    "thing4": {
-                        "thing5": "something3"
-                    }
-                }
-            }
-        });
-
-        // jafar2.displayJson();
-        // jafar2.listAllKeys();
-        // jafar2.listAllValues();
-        // jafar2.findKey('thing2');
-        // jafar2.findValue('something2');
-
-        //jafar2.replaceKey('thing2');
-
-        //assert.equal(TODO, TODO);
+        //jafar.findKey('thing');
     });
 });
