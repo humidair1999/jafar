@@ -1,6 +1,30 @@
 var assert = require('assert'),
     Jafar = require('../index');
 
+describe('errors thrown when insufficient options provided to constructor', function() {
+    it('should throw an error when no json option is provided', function() {
+        assert.throws(function() {
+            var jafar = new Jafar();
+        });
+    });
+
+    it('should throw an error when invalid json is provided', function() {
+        assert.throws(function() {
+            var jafar = new Jafar({
+                json: 123
+            });
+        });
+    });
+
+    it('should throw an error when invalid json file location is provided', function() {
+        assert.throws(function() {
+            var jafar = new Jafar({
+                json: './test/fake.json'
+            });
+        });
+    });
+});
+
 describe('JSON loaded via file', function() {
     var jafar;
 
