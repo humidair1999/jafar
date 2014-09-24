@@ -11,7 +11,8 @@ more awful stringifying/regexing/parsing steps!
 
 ### Initialization
 
-Initialize jafar with either a reference to a .json file or an actual JSON structure:
+Instantiate an instance of jafar with either a reference to a .json file or an actual
+JSON structure:
 
 ```js
 var jafar = new Jafar({
@@ -50,6 +51,8 @@ jafar.json
 jafar.listAllKeys()
 ```
 
+Recurses over `jafar.json` and creates an array of all keys within the JSON.
+
 ```js
 jafar.findKey()
 ```
@@ -61,6 +64,8 @@ jafar.replaceKey()
 ```js
 jafar.listAllValues()
 ```
+
+Recurses over `jafar.json` and creates an array of all values within the JSON.
 
 ```js
 jafar.findValue()
