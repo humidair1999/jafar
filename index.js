@@ -100,14 +100,13 @@ Jafar.prototype.listAllValues = function() {
         }
     })(this.json);
 
-    console.log('values: ', values);
     return values;
 };
 
 Jafar.prototype.findValue = function(value) {
     var values = this.listAllValues();
 
-    console.log(values.indexOf(value));
+    return values.indexOf(value);
 };
 
 Jafar.prototype.replaceValue = function(valueToFind, replacementValue, isGlobal) {

@@ -77,4 +77,16 @@ describe('JSON loaded via file', function() {
             assert.strictEqual(JSON.stringify(jafar.json), '{"hahaha":{"another":"somethingsomething"},"hahaha2":{"another2":"something2"},"hahaha3":{"hahaha4":{"hahaha5hahaha5":"something3"}}}');
         });
     });
+
+    describe('.listAllValues()', function() {
+        it('should list array of all values found within .json object', function() {
+            assert.equal(jafar.listAllValues().join(), ['somethingsomething', 'something2', 'something3'].join());
+        });
+    });
+
+    describe('.findValue()', function() {
+        it('should find index of value found within values array', function() {
+            assert.strictEqual(jafar.findValue('something3'), 2);
+        });
+    });
 });
