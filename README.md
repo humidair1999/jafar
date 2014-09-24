@@ -53,11 +53,15 @@ jafar.listAllKeys()
 
 Recurses over `jafar.json` and returns an array of all keys within the JSON.
 
+---
+
 ```js
 jafar.findKey(key)
 ```
 
 Returns the index of `key` as it exists within the array returned by `listAllKeys()`.
+
+---
 
 ```js
 jafar.replaceKey(keyToFind, replacementKey, isExact, isGlobal)
@@ -73,17 +77,23 @@ per key (that is, the `g` RegEx flag will be used).
 
 Note that this method will **transform** `jafar.json` into entirely new JSON.
 
+---
+
 ```js
 jafar.listAllValues()
 ```
 
 Recurses over `jafar.json` and returns an array of all values within the JSON.
 
+---
+
 ```js
 jafar.findValue(value)
 ```
 
 Returns the index of `value` as it exists within the array returned by `listAllValues()`.
+
+---
 
 ```js
 jafar.replaceValue(valueToFind, replacementValue, isExact, isGlobal)
