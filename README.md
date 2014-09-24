@@ -51,11 +51,13 @@ jafar.json
 jafar.listAllKeys()
 ```
 
-Recurses over `jafar.json` and creates an array of all keys within the JSON.
+Recurses over `jafar.json` and returns an array of all keys within the JSON.
 
 ```js
-jafar.findKey()
+jafar.findKey(key)
 ```
+
+Returns the index of `key` as it exists within the array returned by `listAllKeys()`.
 
 ```js
 jafar.replaceKey()
@@ -65,11 +67,13 @@ jafar.replaceKey()
 jafar.listAllValues()
 ```
 
-Recurses over `jafar.json` and creates an array of all values within the JSON.
+Recurses over `jafar.json` and returns an array of all values within the JSON.
 
 ```js
-jafar.findValue()
+jafar.findValue(value)
 ```
+
+Returns the index of `value` as it exists within the array returned by `listAllValues()`.
 
 ```js
 jafar.replaceValue()
