@@ -138,11 +138,7 @@ Jafar.prototype.replaceValue = function(valueToFind, replacementValue, isExact, 
         return clone;
     }
 
-    console.log(this.json);
-
     this.json = cloneObject(this.json);
-
-    console.log(this.json);
 };
 
 module.exports = Jafar;
