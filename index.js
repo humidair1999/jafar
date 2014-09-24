@@ -109,11 +109,13 @@ Jafar.prototype.findValue = function(value) {
     return values.indexOf(value);
 };
 
-Jafar.prototype.replaceValue = function(valueToFind, replacementValue, isGlobal) {
+Jafar.prototype.replaceValue = function(valueToFind, replacementValue, isExact, isGlobal) {
     function cloneObject(obj) {
         var clone = {},
             replaceValue = null,
-            findRegEx = new RegExp(valueToFind, (isGlobal ? 'g' : ''));
+            findRegEx = isExact ?
+                new RegExp('\\b' + valueToFind + '\\b', (isGlobal ? 'g' : '')) :
+                new RegExp(valueToFind, (isGlobal ? 'g' : ''));
 
         for (var key in obj) {
             // if currently-iterated key is NOT the lowest-level key/value

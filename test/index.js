@@ -89,4 +89,30 @@ describe('JSON loaded via file', function() {
             assert.strictEqual(jafar.findValue('something3'), 2);
         });
     });
+
+    describe('.replaceValue()', function() {
+        it('should replace non-exact matches of provided value in a non-global manner when isExact=false && isGlobal=false', function() {
+            jafar.replaceValue('something', 'hahaha', false, false);
+
+            assert.strictEqual(JSON.stringify(jafar.json), '{"thing":{"another":"hahahasomething"},"thing2":{"another2":"hahaha2"},"thing3":{"thing4":{"thing5thing5":"hahaha3"}}}');
+        });
+
+        it('should replace exact matches of provided value in a non-global manner when isExact=true && isGlobal=false', function() {
+            jafar.replaceValue('something', 'hahaha', true, false);
+
+            assert.strictEqual(JSON.stringify(jafar.json), '{"thing":{"another":"somethingsomething"},"thing2":{"another2":"something2"},"thing3":{"thing4":{"thing5thing5":"something3"}}}');
+        });
+
+        it('should replace exact matches of provided value in a global manner when isExact=true && isGlobal=true', function() {
+            jafar.replaceValue('something', 'hahaha', true, true);
+
+            assert.strictEqual(JSON.stringify(jafar.json), '{"thing":{"another":"somethingsomething"},"thing2":{"another2":"something2"},"thing3":{"thing4":{"thing5thing5":"something3"}}}');
+        });
+
+        it('should replace non-exact matches of provided value in a global manner when isExact=false && isGlobal=true', function() {
+            jafar.replaceValue('something', 'hahaha', false, true);
+
+            assert.strictEqual(JSON.stringify(jafar.json), '{"thing":{"another":"hahahahahaha"},"thing2":{"another2":"hahaha2"},"thing3":{"thing4":{"thing5thing5":"hahaha3"}}}');
+        });
+    });
 });
