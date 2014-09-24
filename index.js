@@ -43,14 +43,13 @@ Jafar.prototype.listAllKeys = function() {
         }
     })(this.json);
 
-    console.log('keys: ', keys);
     return keys;
 };
 
 Jafar.prototype.findKey = function(key) {
     var keys = this.listAllKeys();
 
-    console.log(keys.indexOf(key));
+    return keys.indexOf(key);
 };
 
 Jafar.prototype.replaceKey = function(keyToFind, replacementKey, isGlobal) {

@@ -40,19 +40,15 @@ describe('JSON loaded via file', function() {
         });
     });
 
-    it('TODO', function() {
-        var jafar = new Jafar({
-            json: './test/sample.json'
+    describe('.listAllKeys()', function() {
+        it('should list array of all keys found within .json object', function() {
+            assert.equal(jafar.listAllKeys().join(), ['thing', 'another', 'thing2', 'another2', 'thing3', 'thing4', 'thing5thing5'].join());
         });
+    });
 
-        // jafar.displayJson();
-        // jafar.listAllKeys();
-        // jafar.listAllValues();
-        // jafar.findKey('thing2');
-        // jafar.findValue('something2');
-
-        //assert.equal(TODO, TODO);
-
-        //jafar.findKey('thing');
+    describe('.findKey()', function() {
+        it('should find index of key found within keys array', function() {
+            assert.strictEqual(jafar.findKey('thing3'), 4);
+        });
     });
 });
