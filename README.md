@@ -60,8 +60,18 @@ jafar.findKey(key)
 Returns the index of `key` as it exists within the array returned by `listAllKeys()`.
 
 ```js
-jafar.replaceKey()
+jafar.replaceKey(keyToFind, replacementKey, isExact, isGlobal)
 ```
+
+Recurses over `jafar.json` and transforms the JSON, replacing `keyToFind` with
+`replacementKey`.
+
+If `isExact` is true, the `keyToFind` must be an exact match in order to be replaced.
+
+If `isGlobal` is true, the `keyToFind` will be replaced as many times as it exists
+per key (that is, the `g` RegEx flag will be used).
+
+Note that this method will **transform** `jafar.json` into entirely new JSON.
 
 ```js
 jafar.listAllValues()
@@ -76,5 +86,15 @@ jafar.findValue(value)
 Returns the index of `value` as it exists within the array returned by `listAllValues()`.
 
 ```js
-jafar.replaceValue()
+jafar.replaceValue(valueToFind, replacementValue, isExact, isGlobal)
 ```
+
+Recurses over `jafar.json` and transforms the JSON, replacing `valueToFind` with
+`replacementValue`.
+
+If `isExact` is true, the `valueToFind` must be an exact match in order to be replaced.
+
+If `isGlobal` is true, the `valueToFind` will be replaced as many times as it exists
+per value (that is, the `g` RegEx flag will be used).
+
+Note that this method will **transform** `jafar.json` into entirely new JSON.
