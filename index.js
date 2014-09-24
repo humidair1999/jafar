@@ -52,11 +52,13 @@ Jafar.prototype.findKey = function(key) {
     return keys.indexOf(key);
 };
 
-Jafar.prototype.replaceKey = function(keyToFind, replacementKey, isGlobal) {
+Jafar.prototype.replaceKey = function(keyToFind, replacementKey, isExact, isGlobal) {
     var cloneObject = function(obj) {
         var clone = {},
             replaceKey = null,
-            findRegEx = new RegExp(keyToFind, (isGlobal ? 'g' : ''));
+            findRegEx = isExact ?
+                new RegExp('\\b' + keyToFind + '\\b', (isGlobal ? 'g' : '')) :
+                new RegExp(keyToFind, (isGlobal ? 'g' : ''));
 
         for (var key in obj) {
             // if current object key matches the user's passed-in 'find' string,
@@ -79,11 +81,7 @@ Jafar.prototype.replaceKey = function(keyToFind, replacementKey, isGlobal) {
         return clone;
     }
 
-    console.log(this.json);
-
     this.json = cloneObject(this.json);
-
-    console.log(this.json);
 };
 
 // value viewing/replacing methods
