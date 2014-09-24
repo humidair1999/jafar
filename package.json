@@ -1,9 +1,9 @@
 {
   "name": "jafar",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "J. Ky Marsh",
   "description": "A module for performing regex-based find and replace on JSON nodes.",
-  "private": true,
+  "private": false,
   "main": "index.js",
   "scripts": {
     "test": "mocha ./test/"
